@@ -26,12 +26,19 @@
             placeholder="自动生成"
             input-align='right'
           />
-          <van-field
+          <!-- <van-field
             v-model="item.countQuantity"
             label="领取数量"
             placeholder="请输入（个）"
             input-align='right'
             :rules="rules.packQuantity"
+          /> -->
+          <van-field
+            v-model="item.countQuantity"
+            label="领取数量"
+            placeholder="请输入（个）"
+            input-align='right'
+            :rule="getRule(1)"
           />
         </div>
         <div style="margin: 16px 16px 0;">
@@ -90,6 +97,17 @@ export default {
     onSubmit(){},
     validatePositiveInteger(value) {
       return /^\+?[0-9][0-9]*$/.test(value)
+    },
+    getRule(index) {
+      console.log('getRule');
+      return {
+        index,
+        validator: this.validator
+      };
+    },
+    validator(value, rule) {
+      console.log('validator')
+      console.log(rule.index);
     },
     validatorGreenBeanGoodQuantity(value) {
       console.log(value)
